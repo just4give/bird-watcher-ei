@@ -7,9 +7,11 @@
 #EI_API_KEY=""
 #EI_COLLECT_MODE=0
 
-if [ $EI_COLLECT_MODE_IMAGE = "1" ];
-then
-    edge-impulse-linux --api-key $EI_API_KEY_IMAGE
-else
-    edge-impulse-linux-runner --api-key $EI_API_KEY_IMAGE
-fi
+# if [ $EI_COLLECT_MODE_IMAGE = "1" ];
+# then
+#     edge-impulse-linux --api-key $EI_API_KEY_IMAGE
+# else
+#     edge-impulse-linux-runner --api-key $EI_API_KEY_IMAGE
+# fi
+
+python3 classify.py

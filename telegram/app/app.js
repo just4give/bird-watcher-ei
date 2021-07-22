@@ -40,5 +40,5 @@ app.post('/send/image', async (req, res)=>{
 });
 
 app.listen(3000,()=>{
-    console.log("server started ");
+    console.log("Telegram block started ");
 })

@@ -1,9 +1,35 @@
 version: '2'
 services: 
-        bird-image-detection:
-                build: ./bird-image-detection
+        
+        telegram:
+                build: ./telegram
                 privileged: true
                 restart: always
+                
+                labels:
+                        io.balena.features.dbus: '1'
+                        io.balena.features.kernel-modules: '1'
+                volumes: 
+                        - 'shared-data:/var/data'
+                        - 'shared-media:/var/media'
+        video-streaming:
+                build: ./streaming
+                network_mode: host
+                labels:
+                        io.balena.features.supervisor-api: '1'
+        video-capture:
+                build: ./rtsp-server
+                network_mode: host
+                privileged: true
+                labels:
+                        io.balena.features.balena-api: '1'
+        ei-processing:
+                build: ./ei-processing
+                privileged: true
+                restart: always
+
+                depends_on:
+                        - video-capture
                 
                 labels:
                         io.balena.features.dbus: '1'
@@ -17,17 +43,6 @@ services:
                         - '/dev:/dev'
                 ports: 
                         - 4912
-        telegram:
-                build: ./telegram
-                privileged: true
-                restart: always
-                
-                labels:
-                        io.balena.features.dbus: '1'
-                        io.balena.features.kernel-modules: '1'
-                volumes: 
-                        - 'shared-data:/var/data'
-                        - 'shared-media:/var/media'
 
 volumes:
         shared-data:
