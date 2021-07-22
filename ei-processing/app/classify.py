@@ -3,8 +3,8 @@ import cv2
 
 print("CV2 Version %s" %(cv2.__version__))
 
-#cap = cv2.VideoCapture('rtsp://192.168.1.237:8554/server')
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture('rtsp://localhost:8554/server')
+#cap = cv2.VideoCapture(0)
 
 if not cap.isOpened():
     print("Video port not opened!")
